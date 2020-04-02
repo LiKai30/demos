@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>数据可视化</title>
     <link rel="stylesheet" href="css/index.css">
 </head>
+
 <body>
     <header>
         <h1>数据可视化-ECharts</h1>
         <div class="showTime"></div>
         <script>
-            var t =null;
-            t = setTimeout(time,1000); //一秒之后开始运行
-            function time(){
+            var t = null;
+            t = setTimeout(time, 1000); //一秒之后开始运行
+            function time() {
                 //为甚么要清除定时器
                 clearTimeout(t);
                 dt = new Date();
@@ -24,7 +26,7 @@
                 var m = dt.getMinutes();
                 var s = dt.getSeconds();
                 document.querySelector('.showTime').innerHTML = `当前时间:${y}年${mt}月${day}-${h}时${m}分${s}秒`;
-                t = setTimeout(time,1000);  //设置定时器，循环运行
+                t = setTimeout(time, 1000);  //设置定时器，循环运行
             }
         </script>
     </header>
@@ -38,19 +40,22 @@
                 <div class="chart"></div>
                 <!-- 设置底下的两个角 -->
                 <div class="panel-footer"></div>
-            </div>    
+            </div>
             <div class="panel line">
-                <h2>柱状图-就业行业</h2>
+                <h2>折线图-人员变化
+                    <a href="javascript:;">2020</a>
+                    <a href="javascript:;">2021</a>
+                </h2>
                 <div class="chart"></div>
                 <!-- 设置底下的两个角 -->
                 <div class="panel-footer"></div>
-            </div>   
+            </div>
             <div class="panel pie">
-                <h2>柱状图-就业行业</h2>
+                <h2>>折线图-播放量</h2>
                 <div class="chart"></div>
                 <!-- 设置底下的两个角 -->
                 <div class="panel-footer"></div>
-            </div>   
+            </div>
         </div>
         <!-- 中间模块 -->
         <div class="column">
@@ -63,10 +68,10 @@
                 </div>
                 <div class="num-bd">
                     <ul>
-                    <li>前端需求人数</li>
-                    <li>市场供求人数</li>
-                </ul>
-            </div>
+                        <li>前端需求人数</li>
+                        <li>市场供求人数</li>
+                    </ul>
+                </div>
             </div>
             <!-- 地图模块一共四个盒子：地图、球体、旋转1、2 -->
             <div class="map">
@@ -78,27 +83,33 @@
             </div>
         </div>
         <div class="column">
-            <div class="panel bar">
-                <h2>柱状图-就业行业</h2>
+            <div class="panel bar-right">
+                <h2>柱状图-技能掌握</h2>
                 <div class="chart"></div>
                 <!-- 设置底下的两个角 -->
                 <div class="panel-footer"></div>
-            </div>    
-            <div class="panel line">
-                <h2>柱状图-就业行业</h2>
+            </div>
+            <div class="panel line-right">
+                <h2>折线图-播放量</h2>
                 <div class="chart"></div>
                 <!-- 设置底下的两个角 -->
                 <div class="panel-footer"></div>
-            </div>   
+            </div>
             <div class="panel pie">
                 <h2>柱状图-就业行业</h2>
                 <div class="chart"></div>
                 <!-- 设置底下的两个角 -->
                 <div class="panel-footer"></div>
-            </div> 
+            </div>
         </div>
     </section>
 
     <script src="js/flexible.js"></script>
+    <script src="js/echarts.min.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/china.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/map.js"></script>
 </body>
+
 </html>

@@ -56,6 +56,8 @@ header{
     .column:nth-child(2){
         flex:5;
         margin: 0 .125rem .1875rem;
+        // 解决拉到最后页面跳动的问题
+        overflow: hidden;
     }
 
     .panel{
@@ -112,21 +114,28 @@ header{
                 content:'';
             }
 
+
+        }
+        h2{
+            height: .6rem;
+            color: #fff;
+            //这样会让文字垂直居中
+            line-height: .6rem;
+            text-align: center;
+            font-size: .25rem;
+            font-weight: 400;
+            a{
+                text-decoration: none;
+                color:#fff;
+                margin:0 .125rem;
+            }
+        }
+        .chart{
+            height:3rem;
+            // background-color: pink;
         }
     }
-    h2{
-        height: .6rem;
-        color: #fff;
-        //这样会让文字垂直居中
-        line-height: .6rem;
-        text-align: center;
-        font-size: .25rem;
-        font-weight: 400;
-    }
-    .chart{
-        height:3rem;
-        background-color: pink;
-    }
+
     .num{
         background-color: rgba(101, 132, 226, 0.1);
         padding: .1875rem;
@@ -240,12 +249,12 @@ header{
             animation: rotate2 15s linear infinite;
         }
 
-        //不改名就继承其他的chart的样式了
+        //不改名就继承其他的chart的样式了,这是因为你前面写错了,是你加了transform
         .chartmap{
             position: absolute;
             top: 0;
             left: 0;
-            transform: translate(-50%,-50%);
+            // transform: translate(-50%,-50%);
             width: 100%;
             height: 10.125rem;
             // background-color: pink;
@@ -263,3 +272,21 @@ header{
     }
 
 }
+
+/* 约束屏幕尺寸 */
+// 小于1024的时候
+@media screen and (max-width: 1024px) {
+    html {
+      font-size: 42px !important;
+    }
+  }
+  //大于1920的时候
+@media screen and (min-width: 1920px) {
+    html {
+      font-size: 80px !important;
+    }
+}
+
+// div{
+//     background-color: #2B91B7;
+// }

@@ -46,6 +46,7 @@ header .showTime {
 .mainbox .column:nth-child(2) {
   flex: 5;
   margin: 0 0.125rem 0.1875rem;
+  overflow: hidden;
 }
 .mainbox .panel {
   position: relative;
@@ -102,7 +103,7 @@ header .showTime {
   border-bottom: 2px solid #02a6b5;
   content: '';
 }
-.mainbox h2 {
+.mainbox .panel h2 {
   height: 0.6rem;
   color: #fff;
   line-height: 0.6rem;
@@ -110,9 +111,13 @@ header .showTime {
   font-size: 0.25rem;
   font-weight: 400;
 }
-.mainbox .chart {
+.mainbox .panel h2 a {
+  text-decoration: none;
+  color: #fff;
+  margin: 0 0.125rem;
+}
+.mainbox .panel .chart {
   height: 3rem;
-  background-color: pink;
 }
 .mainbox .num {
   background-color: rgba(101, 132, 226, 0.1);
@@ -226,7 +231,6 @@ header .showTime {
   position: absolute;
   top: 0;
   left: 0;
-  transform: translate(-50%, -50%);
   width: 100%;
   height: 10.125rem;
 }
@@ -236,5 +240,16 @@ header .showTime {
   }
   to {
     transform: translate(-50%, -50%) rotate(-360deg);
+  }
+}
+/* 约束屏幕尺寸 */
+@media screen and (max-width: 1024px) {
+  html {
+    font-size: 42px !important;
+  }
+}
+@media screen and (min-width: 1920px) {
+  html {
+    font-size: 80px !important;
   }
 }
