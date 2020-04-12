@@ -1,0 +1,120 @@
+/* @import url('https//fonts-googleapis.com/') */
+
+body{
+    font-family: 'Roboto',sans-serif;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+}
+
+.sidebar{
+    position: fixed;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background: #042331;
+    /* 设置过渡效果，默认值就是：all（所有属性） 0 ease 0 */
+    transition: all .5s ease;
+}
+
+.sidebar header{
+    font-size: 22px;
+    color: white;
+    text-align: center;
+    line-height: 70px;
+    background: #063146;
+    /* 控制文本不被选中，意义在哪儿？ */
+    user-select: none;
+}
+
+.sidebar li a{
+    display: block;
+    height:100%;
+    width: 100%;
+    line-height: 65px;
+    font-size: 20px;
+    color:white;
+    padding-left: 40px;
+    box-sizing: border-box;
+    border-top: 1px solid rgba(255, 255, 255, .1);
+    border-bottom: 1px solid black;
+}
+
+/* hover效果，学习了 */
+ul li:hover a{
+    padding-left:50px ;
+    color:#0eeeee;
+}
+
+.sidebar ul a i{
+    margin-right: 16px;
+}
+
+/* 隐藏单选框 */
+#check{
+    display:none;
+}
+
+label #btn,label #cancel{
+    /* 绝对定位脱离文档流 */
+    position: absolute;
+    cursor:pointer;
+    background: #042331;;
+    border-radius: 3px;
+}
+
+label #btn{
+    left: 40px;
+    top: 25px;
+    font-size: 35px;
+    color: white;
+    padding: 6px 12px;
+    /* 控制菜单键的过渡 */
+    transition: all .5s;
+}
+
+label #cancel{
+    /* 在后面的元素默认比前面的大 */
+    z-index: 1111;
+    left: -195px;
+    top:17px;
+    font-size: 30px;
+    color: #0a5275;
+    padding:4px 9px;
+    transition:all .5s ease;
+}
+
+/* 这个语法什么意思：伪类啊，~的意思是，选择后面所有同级元素 .sidebar */
+#check:checked ~ .sidebar{
+    left:0;
+}
+
+#check:checked ~ label #btn{
+    left:250px;
+    opacity: 0;
+    /* 设置或检索在何时成为属性事件的target。none元素永远不会成为鼠标事件的target。 */
+    pointer-events: none;
+}
+
+#check:checked ~ label #cancel{
+    left: 195px;
+}
+
+#check:checked ~ section{
+    margin-left: 250px;
+}
+
+section{
+    background:url(bg.jpg) no-repeat;
+    background-position: center;
+    background-size: cover;
+    /* 100%视窗的高度,为什么只设置宽度不行 */
+    /* width:100vh; */
+    height: 100vh;
+    /* 这样就不会有白色部分的停顿 */
+    transition:all .5s ease;
+}

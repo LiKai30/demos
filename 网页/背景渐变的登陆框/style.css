@@ -1,0 +1,91 @@
+*{
+    margin:0;
+    padding:0;
+    text-decoration:none;
+    list-style:none;
+    font-family: 'Open San Light';
+    letter-spacing: .05em;
+    box-sizing: border-box;
+}
+/* 这两个设置了才会全屏 */
+body,html{
+    height:100%;
+}
+
+.container{
+    height: 100%;
+    /* 渐变背景动画 */
+    background-image: linear-gradient(125deg, #2c3e50,#27ae60,#2980b9,#e74c3c,#8e44ad);
+    /* 先只展示一种颜色 */
+    background-size:400%;
+    animation:bganimation 15s infinite;
+    /* 静态的渐变背景 */
+    /* background-image: linear-gradient(to right,#fbc2eb,#a6c1ee); */
+}
+
+@keyframes bganimation{
+    0%{
+        background-position: 0% 50%;
+    }
+    50%{
+        background-position: 100% 50%;
+
+    }
+    100%{
+        background-position: 50% 0%;
+    }
+    /* 动画结束有个明显的卡顿啊 */
+}
+
+.login-wrapper{
+    background-color: #fff;
+    width: 400px;
+    height: 500px;
+    position: relative;
+    left: 50%;
+    top:50%;
+    transform: translate(-50%,-50%);
+    border-radius: 15px;
+    padding: 0 20px;
+    opacity: .8;
+}
+
+
+.login-wrapper .header{
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 200px;
+}
+
+/* 出现问题 input的超出去了,盒模型的原因  */
+.login-wrapper .form-wrapper .input-item{
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+    border:0;
+    padding:10px;
+    border-bottom:2px solid rgb(128, 125, 125);
+    font-size:15px;
+    /* 去除轮廓的所有样式 */
+    outline: none;
+}
+
+.login-wrapper .form-wrapper .btn{
+    /* display:block; */
+    text-align:center;
+    padding: 5px;
+    margin-top:40px;
+    background-image:linear-gradient(to left,#fbc2eb,#a6c1ee);
+    color:#fff;
+}
+
+.login-wrapper .msg{
+    text-align: center;
+    line-height: 88px;
+}
+
+.login-wrapper .msg a{
+    margin: 1em;
+    color:#fbc2eb;
+}

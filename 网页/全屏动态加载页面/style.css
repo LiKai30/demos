@@ -1,0 +1,117 @@
+/* css的导入字体的方式 */
+/* @import url(""); */
+
+*{
+    margin:0;
+    padding:0;
+    text-decoration:none;
+    list-style:none;
+    color: #fff;
+}
+
+html,body{
+    height: 100%;
+    width: 100%;
+    background-color: aqua;
+}
+
+.intro{
+    height: 100%;
+    width: 100%;
+    margin: auto;
+    background-image: url('../科比圣诞夜之扣.jpg');
+    /* 如果图片没有居中，可以设置position 50% 50% no-repeat*/
+    /* 让图片适配屏幕 */
+    background-size: cover;
+    /* 本来默认有边距的，因为我设置了通配符，所以没了 */
+    display: table;
+}
+
+.intro .inner{
+    /* 使用table居中对齐 */
+    display: table-cell;
+    /* 上下居中 */
+    vertical-align: middle;
+
+}
+
+.content{
+    /* 实现左右居中 */
+    text-align: center;
+    padding-bottom:20%;
+
+}
+
+.content h1{
+    font-family:Helvetica, sans-serif;
+    font-size: 600%;
+    font-weight: 100;  
+    line-height: 200%; 
+}
+
+.content .btn{
+    font-size: 135%;
+    font-weight: 800;
+    color:#3a6168;
+    text-transform: uppercase;
+    border:1px solid #3a6168;
+    padding: 10px 20px;
+    border-radius: 9px;
+    transition: all 0.5s;
+    background-color: beige;
+    opacity: .5;
+}
+
+.btn:hover{
+    color:#cbdfd6;
+    border: 2px solid #cbdfd6;
+    cursor: pointer;
+}
+
+p{
+    font-size: 150%;
+    line-height: 200%;
+}
+
+/* 媒体查询 */
+/* 实现简单的响应式布局 
+    为什么我的媒体查询没用
+*/
+/* @media screen and(max-width: 900px){
+    .content{
+        padding-bottom: 30%;
+    }
+    .content h1{
+        font-size: 450%;
+    }
+    .btn {
+        font-size: 130%;
+        padding:9px 17px;
+    }
+} */
+
+@media screen and(max-width: 768px){
+    .content{
+        padding-bottom: 30%;
+    }
+    .content h1{
+        font-size: 10%;
+    }
+    .btn {
+        font-size: 130%;
+        padding:9px 17px;
+    }
+}
+
+@media screen and(max-width: 480px){
+    .content{
+        padding-bottom: 30%;
+    }
+    .content h1{
+        font-size: 10%;
+    }
+    .btn {
+        font-size: 130%;
+        padding:9px 17px;
+    }
+}

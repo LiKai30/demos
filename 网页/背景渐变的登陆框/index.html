@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="login-wrapper">
+            <form action="" method="POST" id="form">
+                <div class="header">Login</div>
+                <!-- 不应该是表单？ -->
+                <div class="form-wrapper">
+                    <input type="text" name="username" placeholder="username" class="input-item" required="required">
+                    <input type="password" name="password" placeholder="password" class="input-item"
+                        required="required">
+                    <!-- 怎么好多都不用button啊,不好写样式吧，并且button默认submit-->
+                    <!-- <button class="btn">Login</button> -->
+                    <!-- 行内块元素 -->
+                    <!-- <input type="button" class="btn" value="Login"> -->
+                    <!-- div 怎么提交呢-->
+                    <div class="btn" onclick="senForm()">Login</div>
+                </div>
+                <div class="msg">
+                    Don`t have account?<a href="#">Sign up</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        var form = document.getElementById('#form');
+        function senForm(){
+            //这里写验证
+            form.submit();
+            //为啥报错呢
+        }
+        /*
+        required在提交（submit）的时候触发
+        简单来说：onsubmit一般和input和button使用，onsubmit(return Check())  Check函数用来验证表单
+         onsubmit只能表单上使用,提交表单前会触发, onclick是按钮等控件使用, 用来触发点击事件，用div制作按钮的时候。
+         当用户单击了表单中的 Submit 按钮而提交一个表单时，就会调用这个事件句柄函数。注意，当调用方法Form.submit() 时，该处理器函数不会被调用，该方法提交表单的方式与用户单击 Submit 按钮一样。
+
+        如果 onsubmit 句柄返回 fasle，表单的元素就不会提交。如果该函数返回其他值或什么都没有返回，则表单会被提交。
+
+        由于 onsubmit 句柄可以取消表单的提交，所以它对于进行表单验证是十分理想的。看下面的示例(验证密码是否为空，如果为空，就取消表单的提交)：
+
+        */
+    </script>
+</body>
+
+</html>
