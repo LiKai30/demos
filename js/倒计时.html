@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .countDown{
+            width: 500px;
+            margin: 0 auto;
+            text-align: center;
+            
+        }
+        .time-item {
+            font-size: 40px;
+            color: white;
+        }
+        span{
+            background-color: #FFA200;
+            border-radius: 8px;
+           
+        }
+        span:first-child{
+            background-color: transparent;
+        }
+        div>span:first-child{
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="countDown">
+        <h1>距离光棍节，还有</h1>
+        <div class="time-item">
+            <span><span id="day">00</span>天</span>
+            <span><span id="hour">00</span>时</span>
+            <span><span id="minute">00</span>分</span>
+            <span><span id="second">00</span>秒</span>
+        </div>
+    </div>
+
+
+    <script>
+        function getInterval(start, end) {
+            var interval = end - start;
+            var day, hour, minuter, second;
+
+            // 获取两个日期相差得秒数
+            interval /= 1000;
+            day = Math.round(interval / 60 / 60 / 24);   //秒除以60就是分，再除以60就是小时，再除以24就是天数
+            hour = Math.round(interval / 60 / 60 % 24);  //%取余
+            minute = Math.round(interval / 60 % 60);
+            second = Math.round(interval % 60);
+
+            return {
+                day: day,
+                hour: hour,
+                minute: minute,
+                second: second
+            }
+
+        }
+
+        endDate = new Date("2020-11-11");
+        var spanDay = document.getElementById('day');
+        var spanHour = document.getElementById('hour');
+        var spanMinute = document.getElementById('minute');
+        var spanSecond = document.getElementById('second');
+
+
+        countDown();
+        setInterval(countDown, 1000);
+        function countDown(){
+            var startDate = new Date();
+            var interval = getInterval(startDate, endDate);
+            spanDay.innerHTML = interval.day;
+            spanHour.innerHTML = interval.hour;
+            spanMinute.innerHTML = interval.minute;
+            spanSecond.innerHTML = interval.second;
+        }
+
+    </script>
+</body>
+
+</html>

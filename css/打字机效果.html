@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .div1{
+            overflow: hidden;
+            white-space: nowrap;
+            font-size:20px;
+            height: 30px;
+            /*width: 0;*/
+            /*background-color: pink;*/
+            animation:print 3s steps(10) infinite;
+        }
+/*        span {
+        	display:inline-block;
+        	width:px;
+        }*/
+        @keyframes print {
+            from{
+                width:0;
+            }
+            to{
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="div1">
+       	学习前端真的好难啊啊
+    </div>
+</body>
+</html>

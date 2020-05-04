@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    body{
+    	width:100%;
+    	height: 100%;
+    	/*background-color: #eee;*/
+    }
+
+    ul {
+        margin: 100px;
+    }
+
+    ul li {
+        width: 120px;
+        height: 35px;
+        perspective: 500px;
+    }
+
+    .box {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+        transition: .4s;
+        margin-top: 10px;
+    }
+
+    .box:hover {
+        transform: rotateX(100deg);
+    }
+
+    .front,
+    .back {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        line-height: 35px;
+    }
+
+    .front {
+        background-color: pink;
+        transform: translateZ(17.5px)
+    }
+
+    .back {
+        background-color: cyan;
+        /* 不能在z轴移动底下的盒子，因为整个盒子待会旋转的时候，会沿着中线旋转，所以移动上面的盒子 */
+        transform: translateY(17.5px) rotateX(-90deg);
+    }
+
+
+
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li>
+            <div class="box">
+                <div class="front">导航栏</div>
+                <div class="back"><a href="http://www.baidu.com">你好</a></div>
+            </div>
+        </li>
+        <li>
+            <div class="box">
+                <div class="front">导航栏</div>
+                <div class="back">你好</div>
+            </div>
+        </li>
+        <li>
+            <div class="box">
+                <div class="front">导航栏</div>
+                <div class="back">你好</div>
+            </div>
+        </li>
+        <li>
+            <div class="box">
+                <div class="front">导航栏</div>
+                <div class="back">你好</div>
+            </div>
+        </li>
+    </ul>
+
+</body>
+
+</html>

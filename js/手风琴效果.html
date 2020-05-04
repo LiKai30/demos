@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            text-decoration:none;
+            list-style:none;
+        }
+
+        .box {
+            position: relative;
+            margin: 100px auto;
+            width: 1000px;
+            height: 50px;
+            border: 1px solid aqua;
+        }
+        .box li {
+            float: left;
+            position: relative;
+            width: 100px;
+            height: 50px;
+            border: 1px solid black;
+        }
+        .box li .big {
+            /* position: absolute; */
+            width: 300px;
+            height: 50px;
+            background-color: pink;
+            display: none;
+        }
+        .box li .small {
+            position: absolute;
+            top:0;
+            left: 0;
+            width: 100px;
+            height: 50px;
+            background-color: brown;
+        }
+        ul li.current {
+            width: 300px;   
+        }
+        ul .current .big{
+            display: block;
+        }
+        .box li.current .small {
+            display: none;
+        } 
+
+    </style>
+</head>
+<body>
+    <!-- 模仿王者荣耀的手风琴效果 -->
+    <div class="box">
+        <ul>
+            <li class="current">
+                <!-- 原版是一个链接里面两个图片 -->
+                <div class="small"></div>
+                <div class="big"></div>
+            </li>
+            <li>
+                <div class="small"></div>
+                <div class="big"></div>
+            </li>
+            <li>
+                <div class="small"></div>
+                <div class="big"></div>
+            </li>
+            <li>
+                <div class="small"></div>
+                <div class="big"></div>
+            </li>
+            <li>
+                <div class="small"></div>
+                <div class="big"></div>
+            </li>
+        </ul>
+    </div>
+
+    <script src="./js/jquery.js"></script>
+    <script>
+        $('.box li').mouseenter(function(){
+            $(this).stop().animate({
+                width:300,
+            }).find('.small').stop().fadeOut().siblings('.big').stop().fadeIn();
+
+            $(this).siblings("li").stop().animate({
+                width:100
+            }).find('.small').stop().fadeIn().siblings('.big').stop().fadeOut();
+        });
+    </script>
+</body>
+</html>

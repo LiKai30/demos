@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin:0;
+            padding: 0;
+            list-style: none;
+            text-decoration: none;
+        }
+        body{
+           background-color: #eee;
+        }
+
+        .login-btn {
+            text-align: center;
+            font-size: 26px;
+        }
+
+        .login{
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            border: 1px solid #ebebeb;
+            box-shadow: 0 0 20 #ddd;
+            width: 512px;
+            height: 280px;
+            background: #fff;
+            transform: translate(-50%,-50%);
+        }
+        .title {
+            position: relative;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            font-size: 18px;
+            cursor: move;
+        }
+        /* 伪元素不好获取 */
+        .title a{
+            /* content: "关闭"; */
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            height: 50px;
+            width: 50px;
+            border: 1px solid #eee;
+            border-radius: 50%;
+            box-shadow: 5px;
+            background-color: #fff;
+            cursor: pointer; 
+            color: black;
+        }
+
+        .login-input-content {
+            margin-top: 20px;
+        }
+
+        .login-input {
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            margin:0 10px;
+            font-size: 16px;
+        }
+        .login-input input {
+            width:320px;
+            height: 30px;
+        }
+        .login-input label {
+            display: inline-block;
+            width: 100px;
+            /* border: 1px solid red; */
+            text-align: end;
+
+        }
+        .loginBtn {
+            width: 50%;
+            margin: 30px auto 0 auto;
+            line-height: 40px;
+            font-size: 14px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- 弹出登陆的按钮 -->
+    <div class="login-btn"><a href="javascript:;" id="link">点击登陆</a></div>
+    <div class="login">
+        <div id="title" class="title">会员登陆<a href="javascript:;" id="close">关闭</a></div>
+        <div class="login-input-content">
+            <div class="login-input">
+                <label>用户名：</label>
+                <input type="text" placeholder="请输入用户名">
+            </div>
+            <div class="login-input">
+                <label>登陆密码：</label>
+                <input type="password" placeholder="请输入密码">
+            </div>
+            <div class="loginBtn"><a href="javascript:;">登陆</a></div>
+        </div>
+    </div>
+
+    <script>
+        var login = document.querySelector(".login");
+        var close = document.querySelector('#close');
+        var body = document.querySelector('body');
+        var link = document.querySelector("#link");
+        var title = document.querySelector('#title');
+
+        link.addEventListener('click', function() {
+            login.style.display = 'block';
+            body.style.backgroundColor = "pink";
+        })
+        close.addEventListener('click', function(){
+            login.style.display = 'none';
+            body.style.backgroundColor = "#fff";
+        })
+
+        title.addEventListener('mousedown',function(e){
+            // 获取鼠标在盒子里的坐标
+            var x = e.pageX - login.offsetLeft;
+            var y = e.pageY - login.offsetTop;
+            document.addEventListener('mousemove', move);
+            function move(e){
+                // 获取要移动的距离
+                login.style.left = e.pageX - x + 'px';
+                login.style.top = e.pageY - y + 'px';
+            }
+            // 移除事件，需要两个参数
+            document.addEventListener('mouseup', function(){
+                document.removeEventListener('mousemove',move);
+            })
+        })
+    </script>
+</body>
+
+</html>

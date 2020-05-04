@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            text-decoration: none;
+            list-style: none;
+        }
+
+        input {
+            width: 70px;
+            height: 20px;
+        }
+
+        .tabsbox {
+            width: 800px;
+            height: 400px;
+            border: 1px solid gold;
+            margin: 100px auto;
+        }
+
+        h4 {
+            text-align: center;
+            height: 40px;
+            line-height: 40px;
+        }
+
+        nav {
+            height: 50px;
+            border: 1px solid #eee;
+            /* 清除浮动 */
+            overflow: hidden;
+        }
+
+        nav li {
+            width: 100px;
+            height: 50px;
+            border: 1px solid #eee;
+            float: left;
+            /* line-height: 50px; */
+            cursor: pointer;
+            user-select: none;
+        }
+
+        nav li span:first-child {
+            display: inline-block;
+            width: 80px;
+        }
+
+        nav li .close {
+            width: 20px;
+            background-color: green;
+            float: right;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        /* 选择器的组合使用，老是错 */
+        .firstnav li.liactive {
+            background-color: pink;
+        }
+
+        .tabadd {
+            text-align: center;
+        }
+
+        .tabadd span {
+            width: 20px;
+            height: 20px;
+            background-color: green;
+            text-align: center;
+            float: right;
+            cursor: pointer;
+        }
+
+        section.conactive {
+            display: block;
+        }
+
+        section {
+            padding: 20px 0 0 20px;
+            display: none;
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <h4>js面向对象 动态添加标签页</h4>
+        <div class="tabsbox" id="tab">
+            <nav class="firstnav">
+                <ul>
+                    <li class="liactive"><span>测试一</span> <span class="close">X</span></li>
+                    <li><span>测试二</span><span class="close">X</span></li>
+                    <li><span>测试三</span><span class="close">X</span></li>
+                </ul>
+                <div class="tabadd">
+                    <span>+</span>
+                </div>
+            </nav>
+            <!-- tab内容 -->
+            <div class="tabcon">
+                <section class="conactive">测试1</section>
+                <section>测试2</section>
+                <section>测试3</section>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // 面向对象就是利用对象的功能解决问题
+        // 注意类中的方法是不用function定义和，隔离的
+        // 搞清楚this的指向
+        // tab对象需要的功能：1、切换2、删除3、添加4、修改
+        var that;
+        class Tab {
+            constructor(id) {
+                // 1、获取元素
+                that = this;
+                this.main = document.querySelector(id);
+                this.add = this.main.querySelector('.tabadd');
+                this.ul = this.main.querySelector('.firstnav ul:first-child');
+                this.tabcon = this.main.querySelector('.tabcon');
+                // new一下就调用
+                this.init();
+            }
+
+            // 6、因为添加的新的tab项，没有添加点击事件,所以要动态获取
+            updateNode() {
+                this.lis = this.main.querySelectorAll('li');
+                this.sections = this.main.querySelectorAll('section');
+                this.remove = this.ul.querySelectorAll('.close');
+                this.spans = this.ul.querySelectorAll('li span:first-child');
+                // 刚开始获取没写对
+                // console.log(this.spans);
+            }
+
+            init() {
+                this.updateNode();
+                // 2、初始化操作，主要是让相关的元素绑定事件
+                this.add.onclick = this.addTab;
+                for (let i = 0; i < this.lis.length; i++) {
+                    // 添加自定义属性，索引
+                    this.lis[i].index = i;
+                    // onclick只冒泡,这里的函数不能加(),因为点击的时候才执行，加了就立即执行了
+                    this.lis[i].onclick = this.toggleTab;
+                    this.remove[i].onclick = this.removeTab;
+                    this.spans[i].ondblclick = this.editTap;
+                    this.sections[i].ondblclick = this.editTap;
+                }
+            }
+            // 4、清除样式
+            clearClass() {
+                for (let i = 0; i < this.lis.length; i++) {
+                    this.lis[i].className = '';
+                    this.sections[i].className = '';
+                }
+            }
+            // 3、切换
+            toggleTab() {
+                // 排他思想
+                that.clearClass();
+                this.className = 'liactive';
+                // this指的是点击的小li，没有section属性
+                // 应该是tab的section
+                that.sections[this.index].className = 'conactive';
+                // console.log(this.index);
+            }
+
+            // 5、
+            addTab() {
+                that.clearClass();
+                // var li = document.createElement('li');
+                // 因为元素较多，所以使用innerHTML比较合适
+                // 现在还有更高级的insertAdjacentHTML()
+                var li = '<li class="liactive"><span>新tab</span><span class="close">X</span></li>';
+                var section = ' <section class="conactive">新section ' + Math.ceil(Math.random() * 10) + '</section>';
+                // beforeend是在父元素的后面
+                that.ul.insertAdjacentHTML('beforeend', li);
+                that.tabcon.insertAdjacentHTML('beforeend', section);
+
+                // 给新的tab项初始化
+                that.init();
+
+            }
+            removeTab(e) {
+                // 7、虽然x没有索引号，但是他的父亲有
+                e.stopPropagation();    // 阻止冒泡
+                var index = this.parentNode.index;
+                // console.log(index);
+                that.lis[index].remove();
+                that.sections[index].remove();
+                // 更新
+                that.init();
+                // 8、删除了选定tab项时，让前一个处于选定状态
+                // 当我们删除的不是选中的tab项的时候，状态不变
+                if (document.querySelector('.liactive')) return;
+                index--;
+                // 方法一更友好，删除第一个的时候，会让后面的选中
+                if (index === -1) {
+                    index = index + 1;
+                }
+                // that.lis[index].click();
+                // 方法二:两个条件同时满足，才执行函数
+
+                that.lis[index] && that.lis[index].click();
+            }
+
+            // 9、双击修改，使用ondblclick，默认双击事件会选中文本，所以设置user-selected:none;
+            // 修改的实现，是双击加入文本框
+            editTap() {
+                // 这里有个bug，再次双击，就清空了。然后后面的input.parentNode就会报错
+                // 因为不断生成input
+                // this.οndblclick = function(){return false}; // 这个方法没用
+                // 阻止input事件冒泡就行了
+                
+                if(this.nodeName === "SPAN"){
+                    this.innerHTML = '<input type="text" value=' + this.innerText + '>';
+                }else{
+                    this.innerHTML = '<textarea>' + this.innerText + '</textarea>';
+                }
+                // this.innerHTML = '<input type="text">';
+               
+                var input = this.children[0];
+                // 
+                input.ondblclick = function(e){ e.stopPropagation();};
+                // 文本框里面的文字全选
+                input.select();
+                // 焦点离开文本框
+                input.onblur = function(){
+                    // 这里的this指向的input
+                    this.parentNode.innerHTML = this.value;
+                }
+                input.onkeyup = function(e){
+                    // 判断是回车键
+                    if(e.keyCode === 13){
+                        this.blur();
+                    }
+                }
+
+            }
+
+        }
+
+        new Tab('#tab');
+
+    </script>
+</body>
+
+</html>

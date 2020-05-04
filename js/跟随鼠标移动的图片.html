@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            position: absolute;
+            background-color: pink;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+
+    <script>
+        var div = document.querySelector('div');
+
+        document.addEventListener('mousemove', function (e) {
+            // 阻止默认行为 会触发滚动
+
+            var x = e.pageX;
+            var y = e.pageY;
+            div.style.left = x + 'px';
+            div.style.top = y + 'px';
+            e.preventDefault();
+
+        });
+    </script>
+</body>
+
+
+</html>
